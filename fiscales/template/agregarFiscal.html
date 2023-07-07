@@ -1,0 +1,39 @@
+{% extends "layout.html" %}
+{% load crispy_forms_tags %}
+{% load static %} 
+
+{% block title %}Aregar Fiscal{% endblock %}
+
+{%block content %}
+
+{% if form.errors %}
+
+    <div class="alert alert-danger" role="alert">
+        Alert - ERROR!
+    </div>
+
+    {% endif %}
+
+    <div class="col-12">
+
+    <form action="{% url 'guardarFiscal' %}" method="post">
+
+        {% csrf_token %} <!--elemento de seguridad-->
+
+        {% if msg == 'agregado' %}
+
+            <div class="alert alert-success text-center" role="alert">
+                <span class="fs-3 fw-bold">Registro Completado</span></div>
+            </div>
+        {% endif %}
+
+        {{ form|crispy }}
+        <br>
+        <br>
+        <button type="submit" class="btn btn-primary">Guardar</button>
+
+    </form>
+
+</div>
+
+{% endblock %}
